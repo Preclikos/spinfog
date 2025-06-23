@@ -13,10 +13,10 @@ function App() {
 
   const addUser = (name: string) => {
     if (locked) return;
-    
+
     const trimmedName = name.trim();
     if (!trimmedName) return;
-    
+
     setUsers((prevUsers) => {
       if (prevUsers.includes(trimmedName)) {
         return prevUsers;
@@ -35,7 +35,7 @@ function App() {
       <div className="fixed top-6 left-6 z-10 max-md:relative max-md:top-0 max-md:left-0 max-md:mb-4">
         <TwitchChat
           isLocked={locked}
-          channel="andullie"
+          channel="luciefog"
           onJoin={(name) => addUser(name)}
         />
       </div>
@@ -56,7 +56,9 @@ function App() {
               {locked ? '🔒 Locked' : '🔓 Unlocked'}
             </button>
             <p className="text-sm text-gray-300 mt-3 text-center max-w-xs">
-              {locked ? 'Users cannot join automatically from chat' : 'Users can join automatically from chat'}
+              {locked
+                ? 'Users cannot join automatically from chat'
+                : 'Users can join automatically from chat'}
             </p>
           </div>
           <div className="flex-1 flex items-center justify-center w-full">
@@ -71,12 +73,14 @@ function App() {
               <span className="text-2xl">👥</span>
               <span>Users ({users.length})</span>
             </h2>
-            
+
             {users.length === 0 ? (
               <div className="text-center text-gray-400 flex flex-col items-center justify-center flex-1">
                 <div className="text-6xl mb-6">🎯</div>
                 <p className="text-xl mb-2">No users yet</p>
-                <p className="text-sm text-gray-500">Users will appear here when they join from chat</p>
+                <p className="text-sm text-gray-500">
+                  Users will appear here when they join from chat
+                </p>
               </div>
             ) : (
               <div className="flex-1 overflow-y-auto custom-scrollbar">
@@ -94,8 +98,16 @@ function App() {
                         className="ml-4 p-2 text-red-400 hover:text-red-300 hover:bg-red-900/30 rounded-full transition-all duration-200 opacity-70 group-hover:opacity-100"
                         title="Remove user"
                       >
-                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                        <svg
+                          className="w-5 h-5"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clipRule="evenodd"
+                          />
                         </svg>
                       </button>
                     </div>

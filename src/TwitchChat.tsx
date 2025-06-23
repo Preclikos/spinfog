@@ -57,7 +57,7 @@ const TwitchChat = ({ channel, onJoin, isLocked }: TwitchChatProps) => {
 
       const name = tags['display-name'] ?? tags.username;
 
-      if (name && !isLocked) {
+      if (name && !isLocked && message.toLocaleLowerCase() === '!join') {
         onJoin(name);
       }
 
@@ -84,22 +84,26 @@ const TwitchChat = ({ channel, onJoin, isLocked }: TwitchChatProps) => {
       {/* Header */}
       <div className="bg-purple-600/80 p-2.5 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className={`w-2 h-2 rounded-full ${isConnected ? 'bg-green-400' : 'bg-red-400'}`} />
+          <div
+            className={`w-2 h-2 rounded-full ${isConnected ? 'bg-green-400' : 'bg-red-400'}`}
+          />
           <h3 className="font-semibold text-white text-sm">#{channel}</h3>
-          <span className="text-xs text-purple-200">
-            ({messages.length})
-          </span>
+          <span className="text-xs text-purple-200">({messages.length})</span>
         </div>
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
           className="text-white hover:text-purple-200 transition-colors duration-200"
         >
-          <svg 
-            className={`w-4 h-4 transform transition-transform duration-200 ${isCollapsed ? 'rotate-180' : ''}`} 
-            fill="currentColor" 
+          <svg
+            className={`w-4 h-4 transform transition-transform duration-200 ${isCollapsed ? 'rotate-180' : ''}`}
+            fill="currentColor"
             viewBox="0 0 20 20"
           >
-            <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+            <path
+              fillRule="evenodd"
+              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+              clipRule="evenodd"
+            />
           </svg>
         </button>
       </div>
@@ -119,9 +123,7 @@ const TwitchChat = ({ channel, onJoin, isLocked }: TwitchChatProps) => {
                   <span className="font-semibold text-purple-300">
                     {msg.user}:
                   </span>{' '}
-                  <span className="text-gray-200 break-words">
-                    {msg.text}
-                  </span>
+                  <span className="text-gray-200 break-words">{msg.text}</span>
                 </div>
               ))}
               <div ref={messagesEndRef} />
@@ -134,12 +136,16 @@ const TwitchChat = ({ channel, onJoin, isLocked }: TwitchChatProps) => {
       {!isCollapsed && (
         <div className="px-2.5 py-1.5 bg-gray-700/50 border-t border-gray-600/50">
           <div className="flex items-center gap-2 text-xs">
-            <div className={`w-1.5 h-1.5 rounded-full ${isConnected ? 'bg-green-400' : 'bg-red-400'}`} />
+            <div
+              className={`w-1.5 h-1.5 rounded-full ${isConnected ? 'bg-green-400' : 'bg-red-400'}`}
+            />
             <span className="text-gray-300">
               {isConnected ? 'Connected' : 'Disconnected'}
             </span>
             {isLocked && (
-              <span className="ml-auto text-red-300 font-medium">🔒 Locked</span>
+              <span className="ml-auto text-red-300 font-medium">
+                🔒 Locked
+              </span>
             )}
           </div>
         </div>
